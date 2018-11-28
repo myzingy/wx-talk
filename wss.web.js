@@ -51,6 +51,7 @@ wsServer.on('connect', connection => {
         talk.mp3(file,'wav').then(filename=>{
           //connection.sendUTF('reply:wav~~'+filename);
           talk.baiduApi(filename,'A'+Math.random()).then(res=>{
+            res=JSON.stringify(res);
             console.log('baiduApi.res:',res)
             connection.sendUTF(res);
           });
