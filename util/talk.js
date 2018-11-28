@@ -13,9 +13,9 @@ function mp3Format(filename,format='pcm'){
   return new Promise(function(success,fail){
     var command = ffmpeg(filename)
       // set audio bitrate
-      .audioBitrate('128k')
+      .audioBitrate(16000)
       // set audio codec
-      .audioCodec('libmp3lame')
+      //.audioCodec('libmp3lame')
       // set number of audio channels
       .audioChannels(1)
       // set output format to force

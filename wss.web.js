@@ -38,7 +38,7 @@ const wsServer = new WebSocketServer({
 
 wsServer.on('connect', connection => {
   connection.on('message', message => {
-    console.log('message',message)
+    //console.log('message',message)
     if (message.type === 'utf8') {
       console.log('message.utf8Data:' + message.utf8Data)
       connection.sendUTF('reply:' + message.utf8Data)
