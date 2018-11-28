@@ -36,7 +36,7 @@ function mp3Format(filename,format='pcm'){
 function mp3BufferFormat(buffer,filename,format='pcm'){
   let outfile=filename.replace('.mp3','.'+format);
   return new Promise(function(success,fail){
-    var command = ffmpeg(buffer)
+    var command = ffmpeg(new BufferStream(buffer))
     // set audio bitrate
       .audioBitrate(16000)
       // set audio codec

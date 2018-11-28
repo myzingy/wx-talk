@@ -46,6 +46,7 @@ wsServer.on('connect', connection => {
     if (message.type === 'binary') { //二进制Buffer
       //console.log('message.binaryData:~~')
       let file='tmp/aaa.mp3';
+      /*
       talk.write(file,message.binaryData).then(filename=>{
         //connection.sendUTF('reply:mp3~~'+filename);
         talk.mp3(file,'wav').then(filename=>{
@@ -58,9 +59,10 @@ wsServer.on('connect', connection => {
           });
         })
       });
-      // talk.mp3buf(message.binaryData,'tmp/aaa'+Math.random()+'.mp3','wav').then(filename=>{
-      //   connection.sendUTF('reply:~~'+filename);
-      // });
+      */
+      talk.mp3buf(message.binaryData,'tmp/aaa'+Math.random()+'.mp3','wav').then(filename=>{
+       connection.sendUTF('reply:~~'+filename);
+      });
     }
   }).on('close', (reasonCode, description) => {
     console.log('Client Peer ' + connection.remoteAddress + ' disconnected.')
