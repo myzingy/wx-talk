@@ -45,11 +45,14 @@ wsServer.on('connect', connection => {
     }
     if (message.type === 'binary') { //二进制Buffer
       console.log('message.binaryData:~~')
-      let file='tmp/aaa'+Math.random()+'.mp3';
+      let file='tmp/aaa.mp3';
       talk.write(file,message.binaryData).then(filename=>{
         connection.sendUTF('reply:mp3~~'+filename);
         talk.mp3(file,'wav').then(filename=>{
           connection.sendUTF('reply:wav~~'+filename);
+          talk.baiduApi(filename,'A'+Math.random()).then(res=>{
+            connection.sendUTF('reply:txt~~'+JSON.stringify(res));
+          });
         })
       });
       // talk.mp3buf(message.binaryData,'tmp/aaa'+Math.random()+'.mp3','wav').then(filename=>{

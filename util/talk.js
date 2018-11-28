@@ -58,9 +58,38 @@ function mp3BufferFormat(buffer,filename,format='pcm'){
       .save(outfile);
   })
 }
+function baiduApi(wavFile,cuid){
+  var AipSpeechClient = require("baidu-aip-sdk").speech;
+  // 设置APPID/AK/SK
+  var APP_ID = "14949012";
+  var API_KEY = "RbdHgqPIX0P7ZimYjZInpW7U";
+  var SECRET_KEY = "Hl3cS6v53GHkSZkmx2BBO6G6vlb7b2KR";
+
+  // 新建一个对象，建议只保存一个对象调用服务接口
+  var client = new AipSpeechClient(APP_ID, API_KEY, SECRET_KEY);
+
+  var HttpClient = require("baidu-aip-sdk").HttpClient;
+
+  HttpClient.setRequestInterceptor(function(requestOptions) {
+    // 查看参数
+    //console.log(requestOptions)
+    // 修改参数
+    requestOptions.timeout = 5000;
+    // 返回参数
+    return requestOptions;
+  });
+
+  let voice = fs.readFileSync(wavFile);
+
+  let voiceBuffer = new Buffer(voice);
+
+  // 识别本地文件，附带参数
+  return client.recognize(voiceBuffer, 'wav', 16000, {dev_pid: '1536', cuid: cuid})
+}
 //module.exports =
 module.exports={
   write:writeFile,
   mp3:mp3Format,
   mp3buf:mp3BufferFormat,
+  baiduApi:baiduApi,
 }
