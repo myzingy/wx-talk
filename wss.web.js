@@ -60,8 +60,8 @@ wsServer.on('connect', connection => {
         })
       });
       */
-      let buf = new Buffer(message.binaryData);
-      talk.mp3buf(buf,'tmp/aaa'+Math.random()+'.mp3','wav').then(filename=>{
+      var readStream = fs.createReadStream(message.binaryData);
+      talk.mp3buf(readStream,'tmp/aaa'+Math.random()+'.mp3','wav').then(filename=>{
        connection.sendUTF('reply:~~'+filename);
       });
     }
