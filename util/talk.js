@@ -1,5 +1,6 @@
 var fs = require('fs');
 var ffmpeg=require('fluent-ffmpeg');
+var stream = require('stream');
 function writeFile(fileName,dataBuffer){
   return new Promise(function(success,fail){
     fs.writeFile(fileName, dataBuffer, function(err) {
@@ -36,7 +37,9 @@ function mp3Format(filename,format='pcm'){
 function mp3BufferFormat(buffer,filename,format='pcm'){
   let outfile=filename.replace('.mp3','.'+format);
   return new Promise(function(success,fail){
-    var command = ffmpeg(new Buffer(buffer))
+    var bufferStream = new stream.PassThrough();
+    bufferStream.end(Buffer.concat(buffer));
+    var command = ffmpeg(bufferStream)
     // set audio bitrate
       .audioBitrate(16000)
       // set audio codec
