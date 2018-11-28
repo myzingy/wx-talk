@@ -48,7 +48,7 @@ wsServer.on('connect', connection => {
       // talk.write('tmp/aaa.mp3',message.binaryData).then(filename=>{
       //   connection.sendUTF('reply:~~'+filename);
       // });
-      talk.mp3buf(message.binaryData,'tmp/aaa.mp3','wav').then(filename=>{
+      talk.mp3buf(message.binaryData,'tmp/aaa'+Math.random()+'.mp3','wav').then(filename=>{
         connection.sendUTF('reply:~~'+filename);
       });
     }
