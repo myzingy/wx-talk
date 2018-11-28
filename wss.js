@@ -1,7 +1,7 @@
 'use strict';
 
 var fs = require('fs');
-var ffmpeg=require('fluent-ffmpeg');
+//var ffmpeg=require('fluent-ffmpeg');
 
 var cfg = {
     ssl: true,
@@ -40,7 +40,7 @@ var wss = new WebSocketServer({
 
 wss.on('connection', function(wsConnect) {
     wsConnect.on('message', function(message) {
-        console.log(message.length,message.toString('base64'));
+        console.log(message);
         wsConnect.send('reply');
     });
 });
