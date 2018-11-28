@@ -1,5 +1,6 @@
 var fs = require('fs');
 var ffmpeg=require('fluent-ffmpeg');
+var BufferStream = require('node-bufferstream');
 function writeFile(fileName,dataBuffer){
   return new Promise(function(success,fail){
     fs.writeFile(fileName, dataBuffer, function(err) {
