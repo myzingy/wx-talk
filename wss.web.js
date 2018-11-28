@@ -71,11 +71,12 @@ wsServer.on('connect', connection => {
       talk.mp3buf(bufferStream,'tmp/aaa'+Math.random()+'.mp3','wav').then(filename=>{
         //connection.sendUTF('reply:~~'+filename);
         talk.baiduApi(filename,'A'+Math.random()).then(res=>{
+          fs.unlink(filename);
           if(res.result){
             console.log('baiduApi.res:',res.result)
             connection.sendUTF(res.result);
           }
-          fs.unlink(filename);
+
         });
       });
     }
