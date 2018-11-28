@@ -75,6 +75,7 @@ wsServer.on('connect', connection => {
             console.log('baiduApi.res:',res.result)
             connection.sendUTF(res.result);
           }
+          fs.unlink(filename);
         });
       });
     }
