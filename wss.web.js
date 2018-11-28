@@ -1,12 +1,35 @@
+const fs = require('fs');
 const talk = require('./util/talk')
 const http = require('http')
 const WebSocketServer = require('websocket').server
+var cfg = {
+  ssl: true,
+  port: 8888,
+  ssl_key: 'ssl.key',
+  ssl_cert: 'ssl.crt'
+};
+var  httpServer;
+var httpServ = (cfg.ssl) ? require('https') : require('http');
+if (cfg.ssl) {
+  httpServer = httpServ.createServer({
 
-const httpServer = http.createServer((request, response) => {
-  console.log('[' + new Date + '] Received request for ' + request.url)
-  response.writeHead(404)
-  response.end()
-})
+    key: fs.readFileSync(cfg.ssl_key),
+    cert: fs.readFileSync(cfg.ssl_cert)
+
+  },(request, response) => {
+    console.log('[' + new Date + '] Received request for ' + request.url)
+    response.writeHead(404)
+    response.end()
+  })
+} else {
+  httpServer = httpServ.createServer((request, response) => {
+    console.log('[' + new Date + '] Received request for ' + request.url)
+    response.writeHead(404)
+    response.end()
+  })
+}
+
+
 
 const wsServer = new WebSocketServer({
   httpServer,
@@ -34,6 +57,6 @@ wsServer.on('connect', connection => {
   })
 })
 
-httpServer.listen(8888, () => {
+httpServer.listen(cfg.port, () => {
   console.log('Serveris listening on port 8888')
 })
