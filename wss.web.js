@@ -2,6 +2,7 @@ const fs = require('fs');
 const talk = require('./util/talk')
 const http = require('http')
 const WebSocketServer = require('websocket').server
+var stream = require('stream');
 var cfg = {
   ssl: true,
   port: 8888,
@@ -60,8 +61,14 @@ wsServer.on('connect', connection => {
         })
       });
       */
-      var readStream = fs.createReadStream(message.binaryData);
-      talk.mp3buf(readStream,'tmp/aaa'+Math.random()+'.mp3','wav').then(filename=>{
+      // 创建一个bufferstream
+      var bufferStream = new stream.PassThrough();
+      //将Buffer写入
+      bufferStream.end(message.binaryData);
+      //进一步使用
+
+
+      talk.mp3buf(bufferStream.pipe(process.stdout),'tmp/aaa'+Math.random()+'.mp3','wav').then(filename=>{
        connection.sendUTF('reply:~~'+filename);
       });
     }
