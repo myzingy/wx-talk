@@ -5,8 +5,8 @@ const WebSocketServer = require('websocket').server
 var cfg = {
   ssl: true,
   port: 8888,
-  ssl_key: './ssl.key',
-  ssl_cert: './ssl.crt'
+  ssl_key: '/etc/nginx/ssl/vking.wang.key',
+  ssl_cert: '/etc/nginx/ssl/fullchain.cer'
 };
 var  httpServer;
 var httpServ = (cfg.ssl) ? require('https') : require('http');
