@@ -38,7 +38,7 @@ const wsServer = new WebSocketServer({
 
 wsServer.on('connect', connection => {
   connection.on('message', message => {
-    //console.log('message',message)
+    console.log('message',message)
     if (message.type === 'utf8') {
       console.log('message.utf8Data:' + message.utf8Data)
       connection.sendUTF('reply:' + message.utf8Data)
@@ -60,7 +60,8 @@ wsServer.on('connect', connection => {
         })
       });
       */
-      talk.mp3buf(message.binaryData,'tmp/aaa'+Math.random()+'.mp3','wav').then(filename=>{
+      let buf = new Buffer(message.binaryData);
+      talk.mp3buf(buf,'tmp/aaa'+Math.random()+'.mp3','wav').then(filename=>{
        connection.sendUTF('reply:~~'+filename);
       });
     }
