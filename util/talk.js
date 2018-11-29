@@ -90,14 +90,14 @@ function baiduApi(wavFile,cuid){
   return client.recognize(voiceBuffer, 'wav', 16000, {dev_pid: '1536', cuid: cuid})
 }
 function parseNums(str){
-  if(!str) return [];
+  if(!str) return "";
   let pins=slugify(str);
   pins=pins.split('-');
   let nums=[];
   pins.forEach(p=>{
     nums.push(PNUM.indexOf(p))
   })
-  return nums;
+  return nums.toString();
 }
 //module.exports =
 module.exports={

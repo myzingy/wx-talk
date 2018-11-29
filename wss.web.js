@@ -73,8 +73,11 @@ wsServer.on('connect', connection => {
         talk.baiduApi(filename,'A'+Math.random()).then(res=>{
           fs.unlink(filename);
           if(res.result){
-            console.log('baiduApi.res:',res.result)
-            connection.sendUTF(talk.parseNums(res.result));
+            let numStr=talk.parseNums(res.result);
+            console.log('baiduApi.res:',res.result,numStr)
+            if(numStr){
+              connection.sendUTF(numStr);
+            }
           }
         }).catch(()=>{
           fs.unlink(filename);
