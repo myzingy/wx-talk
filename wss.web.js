@@ -66,7 +66,7 @@ wsServer.on('connect', connection => {
       //将Buffer写入
       bufferStream.end(message.binaryData);
       //进一步使用
-      bufferStream.pipe(process.stdout)
+      //bufferStream.pipe(process.stdout)
 
       talk.mp3buf(bufferStream,'tmp/aaa'+Math.random()+'.mp3','wav').then(filename=>{
         //connection.sendUTF('reply:~~'+filename);
