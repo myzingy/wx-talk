@@ -48,16 +48,6 @@ function mp3BufferFormat(buffer,filename,format='pcm'){
       //.audioCodec('libmp3lame')
       // set number of audio channels
       .audioChannels(1)
-      .audioFilters([
-        {
-          filter: 'volume',
-          options: '0.5'
-        },
-        {
-          filter: 'silencedetect',
-          options: 'n=-50dB:d=5'
-        }
-      ])
       // set output format to force
       .format(format)
       // setup event handlers
