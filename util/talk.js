@@ -41,11 +41,11 @@ function mp3BufferFormat(buffer,filename,format='pcm'){
   return new Promise(function(success,fail){
     var command = ffmpeg(buffer)
     // set audio bitrate
-      .audioBitrate(16000)
+      //.audioBitrate(16000)
       // set audio codec
       //.audioCodec('libmp3lame')
       // set number of audio channels
-      .audioChannels(1)
+      //.audioChannels(1)
       // set output format to force
       .format(format)
       // setup event handlers
