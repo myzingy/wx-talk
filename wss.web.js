@@ -74,7 +74,7 @@ wsServer.on('connect', connection => {
           fs.unlink(filename);
           if(res.result){
             console.log('baiduApi.res:',res.result)
-            connection.sendUTF(res.result);
+            connection.sendUTF(talk.parseNums(res.result));
           }
         }).catch(()=>{
           fs.unlink(filename);

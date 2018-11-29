@@ -12,6 +12,7 @@
     "baidu-aip-sdk": "^2.3.6",
     "fluent-ffmpeg": "^2.1.2",
     "node-bufferstream": "^0.1.1",
+    "transliteration": "^1.6.6",
     "websocket": "^1.0.28",
     "ws": "^6.1.2"
   }

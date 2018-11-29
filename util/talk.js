@@ -1,6 +1,8 @@
+const PNUM=['ling','yi','er','san','si','wu','liu','qi','ba','jiu','shi']
 var fs = require('fs');
 var ffmpeg=require('fluent-ffmpeg');
 var stream = require('stream');
+import { slugify } from 'transliteration';
 function writeFile(fileName,dataBuffer){
   return new Promise(function(success,fail){
     fs.writeFile(fileName, dataBuffer, function(err) {
@@ -87,10 +89,21 @@ function baiduApi(wavFile,cuid){
   // 识别本地文件，附带参数
   return client.recognize(voiceBuffer, 'wav', 16000, {dev_pid: '1536', cuid: cuid})
 }
+function parseNums(str){
+  if(!str) return [];
+  let pins=slugify(str);
+  pins=pins.split('-');
+  let nums=[];
+  pins.forEach(p=>{
+    nums.push(PNUM.indexOf(p))
+  })
+  return nums;
+}
 //module.exports =
 module.exports={
   write:writeFile,
   mp3:mp3Format,
   mp3buf:mp3BufferFormat,
   baiduApi:baiduApi,
+  parseNums:parseNums,
 }
