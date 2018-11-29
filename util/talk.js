@@ -2,7 +2,7 @@ const PNUM=['ling','yi','er','san','si','wu','liu','qi','ba','jiu','shi']
 var fs = require('fs');
 var ffmpeg=require('fluent-ffmpeg');
 var stream = require('stream');
-import { slugify } from 'transliteration';
+var TR= require('transliteration');
 function writeFile(fileName,dataBuffer){
   return new Promise(function(success,fail){
     fs.writeFile(fileName, dataBuffer, function(err) {
@@ -91,7 +91,7 @@ function baiduApi(wavFile,cuid){
 }
 function parseNums(str){
   if(!str) return "";
-  let pins=slugify(str);
+  let pins=TR.slugify(str);
   pins=pins.split('-');
   let nums=[];
   pins.forEach(p=>{
