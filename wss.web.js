@@ -82,7 +82,7 @@ wsServer.on('connect', connection => {
           fs.unlink(filename);
           if(res.result){
             let numStr=talk.parseNums(res.result);
-            console.log('baiduApi.res:',res.result,numStr)
+            console.log('baiduApi.res:',res.result,numStr,reply_result)
             if(numStr && reply_result==numStr){
               connection.sendUTF(JSON.stringify({reply:reply,reply_result:reply_result,numStr:numStr}))
             }
