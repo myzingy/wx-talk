@@ -48,6 +48,7 @@ wsServer.on('connect', connection => {
       if(num){
         reply=message.utf8Data;
         reply_result=parseInt(num[1])+parseInt(num[3])*(num[2]=='+'?1:-1);
+        console.log('reply.utf8Data:' + JSON.stringify({reply:reply,reply_result:reply_result})
         connection.sendUTF(JSON.stringify({reply:reply,reply_result:reply_result}))
       }
     }
