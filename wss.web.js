@@ -40,9 +40,16 @@ const wsServer = new WebSocketServer({
 wsServer.on('connect', connection => {
   connection.on('message', message => {
     //console.log('message',message)
+    let reply='';
+    let reply_result='';
     if (message.type === 'utf8') {
       console.log('message.utf8Data:' + message.utf8Data)
-      connection.sendUTF('reply:' + message.utf8Data)
+      let num=message.utf8Data.match(/([\d]+)([\+\-])([\d]+)/);
+      if(num){
+        reply=message.utf8Data;
+        reply_result=parseInt(num[1])+parseInt(num[3])*(num[2]=='+'?1:-1);
+        connection.sendUTF({reply:reply,reply_result:reply_result})
+      }
     }
     if (message.type === 'binary') { //二进制Buffer
       //console.log('message.binaryData:~~')
@@ -75,8 +82,8 @@ wsServer.on('connect', connection => {
           if(res.result){
             let numStr=talk.parseNums(res.result);
             console.log('baiduApi.res:',res.result,numStr)
-            if(numStr){
-              connection.sendUTF(numStr);
+            if(numStr && reply_result==numStr){
+              connection.sendUTF({reply:reply,reply_result:reply_result,numStr:numStr})
             }
           }
         }).catch(()=>{
