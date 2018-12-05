@@ -41,7 +41,7 @@ function mp3BufferFormat(buffer,filename,format='pcm'){
   return new Promise(function(success,fail){
     var command = ffmpeg(buffer)
     // set audio bitrate
-      .audioBitrate(8000)
+      .audioBitrate(16000)
       //.audioBitrate(96000)
       //set audio frequency
       //.audioFrequency(16000)
