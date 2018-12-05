@@ -36,12 +36,12 @@ const wsServer = new WebSocketServer({
   httpServer,
   autoAcceptConnections: true
 })
-
+let reply='';
+let reply_result='';
 wsServer.on('connect', connection => {
   connection.on('message', message => {
     //console.log('message',message)
-    let reply='';
-    let reply_result='';
+
     if (message.type === 'utf8') {
       console.log('message.utf8Data:' + message.utf8Data)
       let num=message.utf8Data.match(/([\d]+)([\+\-])([\d]+)/);
