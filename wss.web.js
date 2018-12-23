@@ -90,7 +90,7 @@ wsServer.on('connect', connection => {
           }
         }).catch(()=>{
           console.log(filename+' baiduApi fail')
-          try{fs.unlink(filename);}catch (e){console.log(filename+' unlink fail!')}
+          //try{fs.unlink(filename);}catch (e){console.log(filename+' unlink fail!')}
         });
       });
     }

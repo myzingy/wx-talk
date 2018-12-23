@@ -94,10 +94,10 @@ function baiduApi(wavFile,cuid){
 }
 function parseNums(str){
   if(!str) return "";
-  let match=str.match(/([\d]+)/);
-  if(match){
-    return match[1]
-  }
+  //let match=str.match(/([\d]+)/);
+  //if(match){
+  //  return match[1]
+  //}
   let pins=TR.slugify(str);
   console.log('baiduApi.pins:',pins)
   pins=pins.split('-');
