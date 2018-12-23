@@ -78,6 +78,7 @@ wsServer.on('connect', connection => {
 
       talk.mp3buf(bufferStream,'tmp/aaa'+Math.random()+'.mp3','wav').then(filename=>{
         //connection.sendUTF('reply:~~'+filename);
+        console.log('reply:~~'+filename);
         talk.baiduApi(filename,'A'+Math.random()).then(res=>{
           //try{fs.unlink(filename);}catch (e){console.log(filename+' unlink fail')}
           if(res.result){
