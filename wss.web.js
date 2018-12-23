@@ -79,7 +79,7 @@ wsServer.on('connect', connection => {
       talk.mp3buf(bufferStream,'tmp/aaa'+Math.random()+'.mp3','wav').then(filename=>{
         //connection.sendUTF('reply:~~'+filename);
         talk.baiduApi(filename,'A'+Math.random()).then(res=>{
-          fs.unlink(filename);
+          try{fs.unlink(filename);}catch (e){console.log(filename+' unlink fail')}
           if(res.result){
             let numStr=talk.parseNums(res.result);
             console.log('baiduApi.res:',res.result,numStr,reply_result)
@@ -87,8 +87,8 @@ wsServer.on('connect', connection => {
               connection.sendUTF(JSON.stringify({reply:reply,reply_result:reply_result,numStr:numStr}))
             }
           }
-        }).catch(()=>{
-          fs.unlink(filename);
+        }).catch((e)=>{
+          try{fs.unlink(filename);}catch (e){console.log(' unlink fail',e)}
         });
       });
     }
