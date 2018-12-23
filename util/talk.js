@@ -93,7 +93,9 @@ function baiduApi(wavFile,cuid){
   return client.recognize(voiceBuffer, 'wav', 16000, {dev_pid: '1536', cuid: cuid})
 }
 function parseNums(str){
+  str=str.toString();
   if(!str) return "";
+
   try{
     let mastr=str.match(/[\d]+/);
     console.log('parseNums.match:',mastr)
