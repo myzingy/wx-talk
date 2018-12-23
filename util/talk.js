@@ -96,14 +96,10 @@ function parseNums(str){
   str=str.toString();
   if(!str) return "";
 
-  try{
-    let mastr=str.match(/[\d]+/);
-    console.log('parseNums.match:',mastr)
-    if(mastr){
-      return mastr.toString();
-    }
-  }catch(e){
-    console.log('match',typeof str,str,e);
+  let mastr=str.match(/[\d]+/);
+  console.log('parseNums.match:',mastr)
+  if(mastr){
+    return mastr.toString();
   }
 
   let pins=TR.slugify(str);
