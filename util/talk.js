@@ -101,7 +101,7 @@ function parseNums(str){
       return mastr.toString();
     }
   }catch(e){
-    console.log('match',e);
+    console.log('match',typeof str,str,e);
   }
 
   let pins=TR.slugify(str);
